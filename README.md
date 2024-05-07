@@ -1,4 +1,4 @@
-# spelesprojekts
+# Speles projekts
 
 Spēles nosaukums: izvairīšanās
 Spēlētājs kontrolē punktu 2d plaknē, kuru var kustināt pa labi, kreisi, uz augšu,  
