@@ -5,15 +5,26 @@
             Izvairīšanās
         </title>
         <style>
-            #myCanvas {
-                background-image: url('stars.png');
-                background-size: cover;
+            canvas {
+                background-image: url('stars.png')
             }
         </style>
     </head>
     <body>
-        <canvas id="myCanvas">
-            
+        <canvas 
+        id="startScreen"
+        height="800"
+        width="800">
         </canvas>
+        <script>
+            var canvas = document.getElementById("startScreen");
+            var ctx = canvas.getContext("2d");
+
+            ctx.font = "48px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = "white"
+            ctx.fillText("Izvairīšanās!", canvas.width / 4, canvas.height / 5)
+        </script>
     </body>
 </html>
