@@ -2,26 +2,26 @@ var gameCanvas = document.getElementById("gameCanvas");
 var gameCtx = gameCanvas.getContext("2d");
 
 var gameOverScreen = document.getElementById("gameOverCanvas");
-
+// definēts kosmosa kuģa atrašanās vieta, un kā izskatās
 var spaceship = new Image();
 spaceship.src = "spaceship.png";
 var spaceshipX = gameCanvas.width / 2 - 25; 
 var spaceshipY = gameCanvas.height / 2 - 25; 
-
+// Paātrināšanās no sākuma stādīta uz 0
 var spaceshipVX = 0; 
 var spaceshipVY = 0; 
 var spaceshipAX = 0; 
 var spaceshipAY = 0; 
-
+// definētas zvaignzes, kas spēlē smukuma pēc kustēsies
 var stars = [];
 var starImage = new Image();
 starImage.src = "ambStar.png";
-
+// definētas 
 var asteroids = [];
 var asteroidImage = new Image();
 asteroidImage.src = "asteroid.png";
 
-// Create a new star outside the canvas
+// Zvaigznes spawnojas neredzamā vietā, bet vēlāk ir redzamas, un kustās uz leju un pa kreisi
 function createStar() {
     var spawnEdge = Math.random() < 0.5 ? "right" : "top";
     var star;
@@ -45,18 +45,18 @@ function createStar() {
     stars.push(star);
 }
 
-// Create a new asteroid above the canvas
+// aster
 function createAsteroid() {
     var asteroid = {
         x: Math.random() * gameCanvas.width,
         y: -20,
-        vx: (Math.random() - 0.5) * 2, // Random horizontal speed between -1 and 1
-        vy: 1 + Math.random() * 2 // Random vertical speed between 1 and 3
+        vx: (Math.random() - 0.5) * 2, // horizontāls ātrums ir random
+        vy: 1 + Math.random() * 2 // Vertikāls ātrums ir random
     };
     asteroids.push(asteroid);
 }
 
-// Draw all stars
+// Tiek zīmētas zvaignzes
 function drawStars() {
     for (var i = 0; i < stars.length; i++) {
         var star = stars[i];
@@ -64,7 +64,7 @@ function drawStars() {
     }
 }
 
-// Draw all asteroids
+// tiek zīmēti asterodi
 function drawAsteroids() {
     for (var i = 0; i < asteroids.length; i++) {
         var asteroid = asteroids[i];
@@ -72,7 +72,7 @@ function drawAsteroids() {
     }
 }
 
-// Update star positions
+// katrā frame tiek zvaignzes atrašanās vietas update
 function updateStars() {
     for (var i = 0; i < stars.length; i++) {
         var star = stars[i];
@@ -108,21 +108,22 @@ function checkCollisions() {
             asteroid.y < spaceshipY + 50 &&
             asteroid.y + 30 > spaceshipY
         ) {
-            // Collision detected, switch to game over screen
+            // Ja saskrienas kuģis un asteroids, tad canvas pāriet uz gameOver kanvasu
             gameCanvas.style.display = "none";
             gameOverCanvas.style.display = "block";
         }
     }
 }
 
+// Tiek spawnots kuģis
 function drawSpaceship() {
     gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
     drawStars();
     drawAsteroids();
     gameCtx.drawImage(spaceship, spaceshipX, spaceshipY, 50, 50);
 }
-
-function updateSpaceship() {
+// Kosmosa kuģa paatrināšanās tiek pārvērsta kustībā
+function updateAll() {
     spaceshipVX += spaceshipAX;
     spaceshipVY += spaceshipAY;
     spaceshipX += spaceshipVX;
@@ -152,7 +153,7 @@ function updateSpaceship() {
     checkCollisions();
     drawSpaceship();
 }
-
+// Tiek lasīts, kādas kustības notiek, un attiecīgam virzienam palielināts 
 document.addEventListener("keydown", function(event) {
     switch(event.key) {
         case "ArrowUp":
@@ -170,6 +171,7 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+// kad spēlētājs beidz spiest arrow pogas, paātrināšanās beidzas
 document.addEventListener("keyup", function(event) {
     switch(event.key) {
         case "ArrowUp":
@@ -183,12 +185,12 @@ document.addEventListener("keyup", function(event) {
     }
 });
 
-// Create a new star every second
+// zvaigzne izveidota katru sekundi
 setInterval(createStar, 1000);
 
-// Create a new asteroid every 2 seconds
+// Zvaigzne izveidota katru otro sekundi
 setInterval(createAsteroid, 2000);
 
-// Update the spaceship position and stars every 20 milliseconds
-setInterval(updateSpaceship, 20);
+// kuģa pozīcija tiek updated bieži
+setInterval(updateAll, 20);
 drawSpaceship();
