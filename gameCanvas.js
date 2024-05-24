@@ -46,7 +46,7 @@ function createStar() {
     stars.push(star);
 }
 
-// aster
+// asteroids tiek izveidots
 function createAsteroid() {
     var asteroid = {
         x: Math.random() * gameCanvas.width,
