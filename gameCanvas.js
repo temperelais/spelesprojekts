@@ -86,7 +86,7 @@ function updateStars() {
     }
 }
 
-// Update asteroid positions
+// Update asteroidu pozīciju
 function updateAsteroids() {
     for (var i = 0; i < asteroids.length; i++) {
         var asteroid = asteroids[i];
