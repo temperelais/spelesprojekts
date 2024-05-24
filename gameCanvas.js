@@ -122,7 +122,7 @@ function drawSpaceship() {
     drawAsteroids();
     gameCtx.drawImage(spaceship, spaceshipX, spaceshipY, 50, 50);
 }
-// Kosmosa kuģa paatrināšanās tiek pārvērsta kustībā
+// Kosmosa kuģa paatrināšanās tiek pārvērsta kustībā, kā arī liegts kustēties ārpus kanvasa
 function updateAll() {
     spaceshipVX += spaceshipAX;
     spaceshipVY += spaceshipAY;
