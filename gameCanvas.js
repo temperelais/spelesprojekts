@@ -16,16 +16,16 @@ var spaceshipAY = 0;
 var stars = [];
 var starImage = new Image();
 starImage.src = "ambStar.png";
-// definētas 
+// definēti asteroidi, no kuriem spēlē ir jāizvairas
 var asteroids = [];
 var asteroidImage = new Image();
 asteroidImage.src = "asteroid.png";
 
 // Zvaigznes spawnojas neredzamā vietā, bet vēlāk ir redzamas, un kustās uz leju un pa kreisi
 function createStar() {
-    var spawnEdge = Math.random() < 0.5 ? "right" : "top";
+    var spawnEdge = Math.random() < 0.5 ? "right" : "top"; // definēts, ka zvaigzne var spawnot tikai uz aukšu un pa labi
     var star;
-
+//  Zvaigznei ir dota random augstums, ja spawnojas pa kreisi
     if (spawnEdge === "right") {
         star = {
             x: gameCanvas.width + 20,
@@ -34,6 +34,7 @@ function createStar() {
             vy: 0.5
         };
     } else {
+        // Zvaigznei 
         star = {
             x: Math.random() * gameCanvas.width,
             y: -20,
@@ -67,7 +68,7 @@ function drawStars() {
 // tiek zīmēti asterodi
 function drawAsteroids() {
     for (var i = 0; i < asteroids.length; i++) {
-        var asteroid = asteroids[i];
+        var asteroid = asteroids[i]; // asteroidi pievienoti listam, lai vēlāk listu varētu salīdzināt, vai asteroidi saskārās ar kuģi
         gameCtx.drawImage(asteroidImage, asteroid.x, asteroid.y, 30, 30);
     }
 }
@@ -98,7 +99,7 @@ function updateAsteroids() {
     }
 }
 
-// Check for collisions between asteroids and the spaceship
+// Skatās, vai kuģis un asteroidi ir saskrējusies
 function checkCollisions() {
     for (var i = 0; i < asteroids.length; i++) {
         var asteroid = asteroids[i];
